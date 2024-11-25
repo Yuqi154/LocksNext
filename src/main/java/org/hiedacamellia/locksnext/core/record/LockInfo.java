@@ -28,7 +28,7 @@ public record LockInfo(Cuboid6i lockedArea, LockedFace lockedFace, Lock lock, It
     );
 
     public LockInfo(){
-        this(new Cuboid6i(), new LockedFace(), new Lock(0L,false, new ArrayList<>(),(byte) 0), ItemStack.EMPTY);
+        this(new Cuboid6i(), new LockedFace(), new Lock(0L,false,"hard"), ItemStack.EMPTY);
     }
 
     @Override

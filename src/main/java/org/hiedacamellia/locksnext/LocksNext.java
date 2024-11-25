@@ -8,6 +8,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import org.hiedacamellia.locksnext.core.config.Config;
 import org.hiedacamellia.locksnext.registries.LocksNextAttachment;
+import org.hiedacamellia.locksnext.registries.LocksNextMenu;
 import org.slf4j.Logger;
 
 @Mod(LocksNext.MODID)
@@ -17,7 +18,7 @@ public class LocksNext {
     public LocksNext(IEventBus modEventBus, ModContainer modContainer) {
 
         LocksNextAttachment.register(modEventBus);
-
+        LocksNextMenu.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 

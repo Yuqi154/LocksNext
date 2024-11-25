@@ -13,7 +13,7 @@ public class GenUtil {
         String descriptionId = block.getDescriptionId();
         RandomSource random = level.getRandom();
         //TODO
-        Lock lock = Lock.create(random.nextLong(), (byte) 0);
+        Lock lock = Lock.createNormal(random.nextLong(), (byte) 0);
         LockInfo lockInfo = LockInfoUtil.create(level, pos,lock);
         if(lockInfo==null) return;
         LevelUtil.addLockInfo(level,lockInfo);

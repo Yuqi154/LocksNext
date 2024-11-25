@@ -22,7 +22,7 @@ import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.L
 public class LockInfoUtil {
 
     public static @Nullable LockInfo create(Level level, BlockPos pos){
-        return create(level, pos, new Lock(0L,false, new ArrayList<>(),(byte) 0));
+        return create(level, pos, new Lock(0L,false,"hard"));
     }
     public static @Nullable LockInfo create(Level level, BlockPos pos, Lock lock){
         BlockState blockState = level.getBlockState(pos);

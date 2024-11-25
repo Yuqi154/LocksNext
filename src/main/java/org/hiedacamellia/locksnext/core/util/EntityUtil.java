@@ -22,7 +22,7 @@ public class EntityUtil {
     public static void setLock(Entity entity, boolean locked){
         LockInfo data = entity.getData(LocksNextAttachment.LOCK_INFO);
         Lock lock = data.lock();
-        lock = new Lock(lock.id(),locked,lock.combo(),lock.length());
+        lock = lock.changeLocked(locked);
         data = new LockInfo(data.lockedArea(),data.lockedFace(),lock,data.itemStack());
         entity.setData(LocksNextAttachment.LOCK_INFO,data);
     }
