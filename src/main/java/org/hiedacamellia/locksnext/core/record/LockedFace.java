@@ -38,6 +38,12 @@ public record LockedFace(Direction direction, AttachFace face) {
     public LockedFace(Direction direction, String face) {
         this(direction, fromString(face));
     }
+    public LockedFace() {
+        this(Direction.NORTH, AttachFace.CEILING);
+    }
+    public LockedFace(Direction direction) {
+        this(direction,faceFromDir(direction));
+    }
 
     public static AttachFace fromString(String face) {
         return AttachFace.valueOf(face);
@@ -67,6 +73,10 @@ public record LockedFace(Direction direction, AttachFace face) {
     }
 
     public static AttachFace faceFromDir(Direction direction) {
-        return direction.getAxis() == Direction.Axis.Y ? AttachFace.CEILING : direction.getAxis() == Direction.Axis.X ? AttachFace.WALL : AttachFace.FLOOR;
+        return switch (direction) {
+            case UP -> AttachFace.CEILING;
+            case DOWN -> AttachFace.FLOOR;
+            default -> AttachFace.WALL;
+        };
     }
 }

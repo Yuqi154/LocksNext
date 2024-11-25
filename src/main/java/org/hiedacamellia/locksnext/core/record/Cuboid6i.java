@@ -53,6 +53,10 @@ public record Cuboid6i(int x1, int y1, int z1, int x2, int y2, int z2){
         this(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
     }
 
+    public Cuboid6i(){
+        this(0,0,0,0,0,0);
+    }
+
     public int lengthX() {
         return x2 - x1;
     }
@@ -94,6 +98,9 @@ public record Cuboid6i(int x1, int y1, int z1, int x2, int y2, int z2){
         return new Vec3((x1 + x2 + vec3i.getX()) / 2.0, (y1 + y2 + vec3i.getY()) / 2.0, (z1 + z2 + vec3i.getZ()) / 2.0);
     }
 
+    public BlockPos centerPos() {
+        return new BlockPos((x1 + x2) / 2, (y1 + y2) / 2, (z1 + z2) / 2);
+    }
 
     @Override
     public String toString() {

@@ -65,4 +65,4 @@
 
 ---
 
-**Copyright © 2024 [Author]**
+**Copyright © 2024 HiedaCamellia**

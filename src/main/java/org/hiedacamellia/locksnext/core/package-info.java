@@ -1,1 +1,0 @@
-package org.hiedacamellia.locksnext.core;

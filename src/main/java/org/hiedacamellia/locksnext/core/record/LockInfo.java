@@ -6,6 +6,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public record LockInfo(Cuboid6i lockedArea, LockedFace lockedFace, Lock lock, ItemStack itemStack) {
     public static final Codec<LockInfo> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
@@ -23,4 +26,16 @@ public record LockInfo(Cuboid6i lockedArea, LockedFace lockedFace, Lock lock, It
             ItemStack.STREAM_CODEC, LockInfo::itemStack,
             LockInfo::new
     );
+
+    public LockInfo(){
+        this(new Cuboid6i(), new LockedFace(), new Lock(0L,false, new ArrayList<>(),(byte) 0), ItemStack.EMPTY);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        LockInfo lockInfo = (LockInfo) obj;
+        return lockedArea.equals(lockInfo.lockedArea) && lockedFace.equals(lockInfo.lockedFace) && lock.equals(lockInfo.lock) && ItemStack.isSameItem(itemStack,lockInfo.itemStack);
+    }
 }
