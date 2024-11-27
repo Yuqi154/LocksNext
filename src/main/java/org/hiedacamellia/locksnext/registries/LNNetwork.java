@@ -5,7 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.hiedacamellia.locksnext.LNMain;
-import org.hiedacamellia.locksnext.core.network.LockStorageAllSync;
+import org.hiedacamellia.locksnext.core.network.*;
 
 @EventBusSubscriber(modid = LNMain.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class LNNetwork {
@@ -17,6 +17,18 @@ public class LNNetwork {
                 LockStorageAllSync.TYPE,
                 LockStorageAllSync.STREAM_CODEC,
                 LockStorageAllSync::handle);
+        registrar.playToClient(
+                LockInfoAddSync.TYPE,
+                LockInfoAddSync.STREAM_CODEC,
+                LockInfoAddSync::handle);
+        registrar.playToClient(
+                LockInfoRemoveSync.TYPE,
+                LockInfoRemoveSync.STREAM_CODEC,
+                LockInfoRemoveSync::handle);
+        registrar.playToClient(
+                LockInfoUpdateSync.TYPE,
+                LockInfoUpdateSync.STREAM_CODEC,
+                LockInfoUpdateSync::handle);
 
 
     }
