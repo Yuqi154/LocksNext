@@ -19,7 +19,10 @@ public class TestMenu extends AbstractContainerMenu {
         super(LocksNextMenu.TEST_MENU.get(), id);
         this.level = inv.player.level();
         this.entity = inv.player;
-        this.lockType = extraData.readEnum(LockType.class);
+        if (extraData != null)
+            this.lockType = extraData.readEnum(LockType.class);
+        else
+            this.lockType = LockType.HARD;
     }
 
     @Override

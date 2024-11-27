@@ -1,16 +1,11 @@
 package org.hiedacamellia.locksnext.core.config;
 
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
-import org.hiedacamellia.locksnext.LocksNext;
 import org.hiedacamellia.locksnext.core.enums.LockType;
 
 import java.util.List;
 
 
-@EventBusSubscriber(modid = LocksNext.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ServerConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -28,9 +23,4 @@ public class ServerConfig {
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 
-
-    @SubscribeEvent
-    static void onLoad(final ModConfigEvent event) {
-
-    }
 }

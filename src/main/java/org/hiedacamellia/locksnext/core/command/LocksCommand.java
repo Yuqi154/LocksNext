@@ -2,7 +2,11 @@ package org.hiedacamellia.locksnext.core.command;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Minecart;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -18,16 +22,15 @@ public class LocksCommand {
         event.getDispatcher().register(Commands.literal("locksnext")
                 .then(Commands.literal("debug")
                         .then(Commands.literal("screen")
-                                .then(Commands.literal("hard")
+                                .then(Commands.literal("hard").then(Commands.argument("target", EntityArgument.player())
                                         .executes(context -> {
-                                            Minecraft.getInstance().player.openMenu(
-                                                    new LockMenuProvider(LockType.HARD, Component.literal("hard"))
-                                            );
+                                            ServerPlayer player = EntityArgument.getPlayer(context, "target");
+                                            player.openMenu(new LockMenuProvider(LockType.HARD, Component.literal("hard")));
                                             return 0;
                                         })
 
 
-                                )
+                                ))
 
 
 

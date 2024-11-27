@@ -46,16 +46,11 @@ public class LockInfoUtil {
         if (blockState.getValue(DOUBLE_BLOCK_HALF) == LOWER) return null;
         BlockPos pos1 = pos.below();
         if (!blockState.hasProperty(DOOR_HINGE)) return pos1;
-        if (blockState.hasProperty(HORIZONTAL_FACING)) {
-            BlockPos pos2 = pos1.relative(blockState.getValue(DOOR_HINGE) == LEFT ? direction.getClockWise() : direction.getCounterClockWise());
-            if (level.getBlockState(pos2).is(blockState.getBlock())) {
-                if (blockState.getValue(DOOR_HINGE) == LEFT) {
-                    return null;
-                }
-                pos1 = pos2;
-            }
-        }
-        return pos1;
+        if (!blockState.hasProperty(HORIZONTAL_FACING))  return pos1;
+        BlockPos pos2 = pos1.relative(blockState.getValue(DOOR_HINGE) == LEFT ? direction.getClockWise() : direction.getCounterClockWise());
+        if (!level.getBlockState(pos2).is(blockState.getBlock())) return null;
+        if (blockState.getValue(DOOR_HINGE) == LEFT) return null;
+        return pos2;
     }
 
     public static @Nullable BlockPos checkChest(BlockPos pos, BlockState blockState) {
