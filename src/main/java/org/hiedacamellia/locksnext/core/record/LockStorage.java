@@ -5,6 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.hiedacamellia.locksnext.core.network.LockStorageAllSync;
+import org.hiedacamellia.locksnext.registries.LNAttachment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +26,16 @@ public record LockStorage(List<LockInfo> infos) {
 
     public LockStorage(){
         this(new ArrayList<>());
+    }
+
+    public static LockStorage fromChunk(LevelChunk chunk){
+        return chunk.getData(LNAttachment.LOCK_STORAGE);
+    }
+    public static void setChunk(LevelChunk chunk, LockStorage storage){
+        chunk.setData(LNAttachment.LOCK_STORAGE, storage);
+    }
+
+    public void sync(LevelChunk chunk){
+        PacketDistributor.sendToAllPlayers(new LockStorageAllSync(chunk.getPos(), this.infos()));
     }
 }

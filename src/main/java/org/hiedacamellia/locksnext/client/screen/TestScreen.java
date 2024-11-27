@@ -9,10 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import org.hiedacamellia.locksnext.LocksNext;
+import org.hiedacamellia.locksnext.LNMain;
 import org.hiedacamellia.locksnext.common.menu.TestMenu;
 import org.hiedacamellia.locksnext.core.enums.LockType;
-import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 public class TestScreen extends AbstractContainerScreen<TestMenu> {
@@ -20,11 +19,12 @@ public class TestScreen extends AbstractContainerScreen<TestMenu> {
     public final Player entity;
     public final LockType lockType;
 
-    public static final ResourceLocation LOCK = LocksNext.loc("textures/gui/lock.png");
-    public static final ResourceLocation LOCK_PICK = LocksNext.loc("textures/gui/lock_pick.png");
+    public static final ResourceLocation LOCK = LNMain.loc("textures/gui/lock.png");
+    public static final ResourceLocation LOCK_PICK = LNMain.loc("textures/gui/lock_pick.png");
 
 
-    private int lock_pick_angle;
+    private float lock_pick_angle;
+    private float lock_pick_speed;
     private int rotate_angle;
 
     private final static int KEY_UP = Minecraft.getInstance().options.keyUp.getKey().getValue();
@@ -42,6 +42,7 @@ public class TestScreen extends AbstractContainerScreen<TestMenu> {
         this.rotate_angle =0;
         this.imageWidth = 48;
         this.imageHeight = 48;
+        this.lock_pick_speed=0;
     }
     @Override
     public void init(){
@@ -62,26 +63,40 @@ public class TestScreen extends AbstractContainerScreen<TestMenu> {
         pose.pushPose();
         guiGraphics.blit(LOCK, leftPos, topPos, 0, 0, 48, 48, 48, 96);
         guiGraphics.blit(LOCK, leftPos, topPos, 0, 48, 48, 48, 48, 96);
-        pose.popPose();
-        pose.pushPose();
         pose.rotateAround(new Quaternionf().rotateZ((float) (lock_pick_angle*Math.PI/180)), center_x, center_y, 0);
-        guiGraphics.blit(LOCK_PICK, center_x ,center_y-3, 0, 0, 56, 6, 56, 6);
+        guiGraphics.blit(LOCK_PICK, center_x-2 ,center_y-3, 0, 0, 56, 6, 56, 6);
         pose.popPose();
     }
 
     @Override
     public void containerTick() {
         this.rotate_angle--;
+        if(this.lock_pick_speed<0.5&&this.lock_pick_speed>-0.5) {
+            this.lock_pick_speed = 0;
+            return;
+        }
+        this.lock_pick_angle+=this.lock_pick_speed;
+        if(this.lock_pick_angle>360)
+            this.lock_pick_angle-=360;
+        if(this.lock_pick_angle<0)
+            this.lock_pick_angle+=360;
+
+        if(this.lock_pick_speed>=0.5)
+            this.lock_pick_speed-=0.5f;
+        if(this.lock_pick_speed<=-0.5)
+            this.lock_pick_speed+=0.5f;
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if(keyCode== KEY_UP){
-            this.lock_pick_angle++;
+        if(keyCode== KEY_DOWN){
+            if(this.lock_pick_speed<5)
+                this.lock_pick_speed=5f;
             return true;
         }
-        if(keyCode== KEY_DOWN){
-            this.lock_pick_angle--;
+        if(keyCode== KEY_UP){
+            if(this.lock_pick_speed>-5)
+                this.lock_pick_speed=-5f;
             return true;
         }
         if(keyCode== KEY_USE){

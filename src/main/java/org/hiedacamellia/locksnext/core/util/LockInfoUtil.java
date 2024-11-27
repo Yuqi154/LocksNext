@@ -12,17 +12,15 @@ import org.hiedacamellia.locksnext.core.record.LockInfo;
 import org.hiedacamellia.locksnext.core.record.LockedFace;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.*;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.CHEST_TYPE;
 import static net.minecraft.world.level.block.state.properties.DoorHingeSide.LEFT;
 import static net.minecraft.world.level.block.state.properties.DoubleBlockHalf.LOWER;
 
 public class LockInfoUtil {
 
     public static @Nullable LockInfo create(Level level, BlockPos pos){
-        return create(level, pos, new Lock(0L,false,"hard"));
+        return create(level, pos, new Lock(0L,false,"modern"));
     }
     public static @Nullable LockInfo create(Level level, BlockPos pos, Lock lock){
         BlockState blockState = level.getBlockState(pos);

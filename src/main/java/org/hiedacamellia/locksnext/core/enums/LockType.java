@@ -1,10 +1,10 @@
 package org.hiedacamellia.locksnext.core.enums;
 
 public enum LockType {
-    EASY("easy"),
-    NORMAL("normal"),
-    HARD("hard"),
-    MODERN("modern");
+    SIMPLE("simple"),
+    CLASSIC("classic"),
+    MODERN("modern"),
+    HARD("hard");
 
 
     final String name;

@@ -9,9 +9,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
 import org.hiedacamellia.locksnext.core.enums.LockType;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public record Lock(long id, boolean isLocked, LockType lockType, CompoundTag extraData) {
 
     public static final Codec<Lock> CODEC = RecordCodecBuilder.create(
@@ -48,11 +45,11 @@ public record Lock(long id, boolean isLocked, LockType lockType, CompoundTag ext
     }
 
     public static Lock createNormal(long id, byte length) {
-        return new Lock(id, true, LockType.NORMAL, summonCombo(id, length));
+        return new Lock(id, true, LockType.CLASSIC, summonCombo(id, length));
     }
 
     public static Lock createEasy(long id, byte length) {
-        return new Lock(id, true, LockType.NORMAL, summonCombo(id, length));
+        return new Lock(id, true, LockType.CLASSIC, summonCombo(id, length));
     }
 
     public static Lock createHard(long id){

@@ -12,13 +12,13 @@ public class ServerConfig {
     private static final ModConfigSpec.ConfigValue<List<LockType>> LOCK_TYPE =
             BUILDER.comment("LocksTypes that are enabled")
                     .comment("将启用的锁类型")
-                    .comment("EASY: A QTE mini game.")
-                    .comment("MEDIUM: Classic mini game.")
-                    .comment("HARD: A difficult mini game.")
-                    .comment("EASY: QTE小游戏。")
-                    .comment("MEDIUM: 经典小游戏。")
-                    .comment("HARD: 困难的小游戏。")
-                    .define("lock_type", List.of(LockType.HARD));
+                    .comment("SIMPLE: A QTE mini game.")
+                    .comment("CLASSIC: Classic mini game.")
+                    .comment("MODERN: A modern unlock mini game.")
+                    .comment("SIMPLE: QTE小游戏。")
+                    .comment("CLASSIC: 经典小游戏。")
+                    .comment("MODERN: 现代的开锁小游戏。")
+                    .define("lock_type", List.of(LockType.MODERN));
 
 
     public static final ModConfigSpec SPEC = BUILDER.build();

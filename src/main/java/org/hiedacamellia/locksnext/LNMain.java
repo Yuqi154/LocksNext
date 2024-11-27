@@ -6,21 +6,19 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import org.hiedacamellia.locksnext.core.config.Config;
 import org.hiedacamellia.locksnext.core.config.ServerConfig;
-import org.hiedacamellia.locksnext.registries.LocksNextAttachment;
-import org.hiedacamellia.locksnext.registries.LocksNextMenu;
+import org.hiedacamellia.locksnext.registries.LNAttachment;
+import org.hiedacamellia.locksnext.registries.LNMenu;
 import org.slf4j.Logger;
 
-@Mod(LocksNext.MODID)
-public class LocksNext {
+@Mod(LNMain.MODID)
+public class LNMain {
     public static final String MODID = "locksnext";
     private static final Logger LOGGER = LogUtils.getLogger();
-    public LocksNext(IEventBus modEventBus, ModContainer modContainer) {
+    public LNMain(IEventBus modEventBus, ModContainer modContainer) {
 
-        LocksNextAttachment.register(modEventBus);
-        LocksNextMenu.register(modEventBus);
-        //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        LNAttachment.register(modEventBus);
+        LNMenu.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
     }
 
