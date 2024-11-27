@@ -13,6 +13,11 @@ public class LevelUtil {
         return ChunkUtil.checkLocked(chunk,blockPos);
     }
 
+    public static LockInfo getLocked(Level level, BlockPos blockPos){
+        LevelChunk chunk = level.getChunkAt(blockPos);
+        return ChunkUtil.getLocked(chunk,blockPos);
+    }
+
     public static void updateLockInfo(Level level,LockInfo newInfo,LockInfo oldInfo){
         LevelChunk chunk = level.getChunkAt(newInfo.lockedArea().centerPos());
         ChunkUtil.updateLockInfo(chunk,newInfo,oldInfo);

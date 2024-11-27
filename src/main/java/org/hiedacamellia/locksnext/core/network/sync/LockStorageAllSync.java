@@ -1,4 +1,4 @@
-package org.hiedacamellia.locksnext.core.network;
+package org.hiedacamellia.locksnext.core.network.sync;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;

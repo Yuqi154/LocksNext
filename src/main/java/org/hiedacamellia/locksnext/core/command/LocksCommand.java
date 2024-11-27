@@ -2,6 +2,7 @@ package org.hiedacamellia.locksnext.core.command;
 
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,7 +22,7 @@ public class LocksCommand {
                                 .then(Commands.literal("modern").then(Commands.argument("target", EntityArgument.player())
                                         .executes(context -> {
                                             ServerPlayer player = EntityArgument.getPlayer(context, "target");
-                                            player.openMenu(new LockMenuProvider(LockType.HARD, Component.literal("hard")));
+                                            player.openMenu(new LockMenuProvider(LockType.MODERN,player.getOnPos()));
                                             return 0;
                                         })
 

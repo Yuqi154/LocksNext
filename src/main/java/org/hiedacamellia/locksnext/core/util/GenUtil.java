@@ -11,9 +11,9 @@ public class GenUtil {
 
     public static void GenLock(Level level, Block block, BlockPos pos){
         String descriptionId = block.getDescriptionId();
-        RandomSource random = level.getRandom();
+        RandomSource randomSource = level.getRandom().fork();
         //TODO
-        Lock lock = Lock.createNormal(random.nextLong(), (byte) 0);
+        Lock lock = LockUtil.genLock(randomSource.nextLong());
         LockInfo lockInfo = LockInfoUtil.create(level, pos,lock);
         if(lockInfo==null) return;
         LevelUtil.addLockInfo(level,lockInfo);

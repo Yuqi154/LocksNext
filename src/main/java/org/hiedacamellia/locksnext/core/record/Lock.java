@@ -44,15 +44,18 @@ public record Lock(long id, boolean isLocked, LockType lockType, CompoundTag ext
         return lockType.getName();
     }
 
-    public static Lock createNormal(long id, byte length) {
+    public static Lock createClassic(long id, byte length) {
         return new Lock(id, true, LockType.CLASSIC, summonCombo(id, length));
     }
 
-    public static Lock createEasy(long id, byte length) {
-        return new Lock(id, true, LockType.CLASSIC, summonCombo(id, length));
+    public static Lock createSimple(long id) {
+        RandomSource randomSource = RandomSource.create(id);
+        CompoundTag extraData = new CompoundTag();
+        extraData.putDouble("target",randomSource.nextDouble());
+        return new Lock(id, true, LockType.CLASSIC,extraData);
     }
 
-    public static Lock createHard(long id){
+    public static Lock createModern(long id){
         RandomSource randomSource = RandomSource.create(id);
         CompoundTag extraData = new CompoundTag();
         extraData.putDouble("angle",randomSource.nextDouble()*360);

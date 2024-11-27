@@ -1,4 +1,4 @@
-package org.hiedacamellia.locksnext.core.network;
+package org.hiedacamellia.locksnext.core.network.sync;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

@@ -5,19 +5,27 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import org.hiedacamellia.locksnext.core.record.LockInfo;
 import org.hiedacamellia.locksnext.core.record.LockStorage;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ChunkUtil {
     public static boolean checkLocked(LevelChunk chunk, BlockPos blockPos){
+        LockInfo lockInfo = getLocked(chunk, blockPos);
+        if(lockInfo == null)
+            return false;
+        return lockInfo.lock().isLocked();
+    }
+
+    public static @Nullable LockInfo getLocked(LevelChunk chunk, BlockPos blockPos){
         LockStorage data = LockStorage.fromChunk(chunk);
         List<LockInfo> infos = data.infos();
         if(infos.isEmpty())
-            return false;
+            return null;
         for(LockInfo info : infos){
             if(info.lockedArea().contains(blockPos))
-                return true;
+                return info;
         }
-        return false;
+        return null;
     }
 
     public static void updateLockInfo(LevelChunk chunk,LockInfo newInfo,LockInfo oldInfo){
